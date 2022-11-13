@@ -58,26 +58,42 @@ function playRound(playerSelection, computerSelection) {
     return result;
 }
 
-
+//a function that play 5 round and tell the winer
 function game(){
+    //store player and computer score
     let playerScore = 0;
     let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-
-//choice of the player and the computer
-const playerSelection = prompt("choose rock, paper, scissors");
-const computerSelection = getComputerChoice();
-//show the winer
-let roundWiner = playRound(playerSelection, computerSelection);
-console.log(roundWiner);
-        
+    //play 5 round 
+    for (let i = 0; i <= 5; i++) {
+        //choice of the player and the computer
+        const playerSelection = prompt("choose rock, paper, scissors");
+        const computerSelection = getComputerChoice();
+        //store return in playround
+        let roundWiner = playRound(playerSelection, computerSelection);
+        //show the winer in this round
+        console.log(roundWiner);
+        //if you win player score up by 1
         if (roundWiner ===`you win! ${playerSelection} beats ${computerSelection}`){
             playerScore++;
         }
+        //if you win computer score up by 1
         else if(roundWiner ===`you lose! ${computerSelection} beats ${playerSelection}`){
             computerScore++;
         }
+        //if tie this round does'nt count
+        else{
+            i--;
+        }
+        //show score
         console.log(`player:${playerScore} vs computer:${computerScore}`);
+    }
+    switch (true) {
+        case (playerScore > computerScore):
+            console.log("you win");
+            break;
+        case (playerScore < computerScore):
+            console.log("you lose");
+            break;
     }
 }
 game();
