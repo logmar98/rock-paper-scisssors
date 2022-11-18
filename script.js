@@ -5,16 +5,16 @@ function getComputerChoice() {
     //choose random number from 0 to 2 and store it in 'x'
     let x = Math.floor(Math.random() * 3);
     //return value that equal to 'x' in arry choice
-console.log(choice[x])
+//console.log(choice[x])
     return choice[x];
     
 }
 //a function that play single game and show the winer
 function playRound(playerSelection, computerSelection) {
     //make the value lowercase
-    const playerSelectionLower = playerSelection.toLowerCase();
+    //const playerSelectionLower = playerSelection.toLowerCase();
     //if it's rock try this cases
-        if (playerSelectionLower == "rock") {
+        if (playerSelection == "rock") {
             switch (computerSelection) {
                 case "rock":
                     result = "tie"
@@ -28,7 +28,7 @@ function playRound(playerSelection, computerSelection) {
             }
         }
     //if it's paper try this cases
-        else if (playerSelectionLower == "paper") {
+        else if (playerSelection == "paper") {
             switch (computerSelection) {
                 case "paper":
                     result = "tie"
@@ -42,7 +42,7 @@ function playRound(playerSelection, computerSelection) {
             }
         }
     //if it's scissors try this cases
-        else if (playerSelectionLower == "scissors") {
+        else if (playerSelection == "scissors") {
             switch (computerSelection) {
                 case "scissors":
                     result = "tie"
@@ -57,43 +57,56 @@ function playRound(playerSelection, computerSelection) {
         }
     return result;
 }
-
-//a function that play 5 round and tell the winer
 function game(){
-    //store player and computer score
-    let playerScore = 0;
-    let computerScore = 0;
+// buttons is a node list. It looks and acts much like an array.
+const buttons = document.querySelectorAll('button');
+const scoreUi = document.querySelector('#score')
+const winnerUi = document.querySelector('#winner')
+let playerScore = 0;
+let computerScore = 0;
+//scoreUi.textContent = 'djflfdl';
+
+// we use the .forEach method to iterate through each button
+buttons.forEach((button) => {
+
+  // and for each one we add a 'click' listener
+  button.addEventListener('click', () => {
+    
+    
     //play 5 round 
-    for (let i = 0; i <= 5; i++) {
-        //choice of the player and the computer
-        const playerSelection = prompt("choose rock, paper, scissors");
-        const computerSelection = getComputerChoice();
-        //store return in playround
+   if(playerScore != 5 && computerScore != 5) {
+    const computerSelection = getComputerChoice();
+    const playerSelection = `${button.id}`;
+    console.log(computerSelection);
+    console.log(playerSelection);
+        
+        
         let roundWiner = playRound(playerSelection, computerSelection);
         //show the winer in this round
         console.log(roundWiner);
-        //if you win player score up by 1
-        if (roundWiner ===`you win! ${playerSelection} beats ${computerSelection}`){
-            playerScore++;
-        }
-        //if you win computer score up by 1
-        else if(roundWiner ===`you lose! ${computerSelection} beats ${playerSelection}`){
-            computerScore++;
-        }
-        //if tie this round does'nt count
-        else{
-            i--;
-        }
+            //if you win player score up by 1
+            if (roundWiner ===`you win! ${playerSelection} beats ${computerSelection}`){
+                playerScore++;
+            }
+            //if you win computer score up by 1
+            else if(roundWiner ===`you lose! ${computerSelection} beats ${playerSelection}`){
+                computerScore++;
+            }
+            
         //show score
-        console.log(`player:${playerScore} vs computer:${computerScore}`);
+        scoreUi.textContent = `player:${playerScore} vs computer:${computerScore}`;
     }
-    switch (true) {
-        case (playerScore > computerScore):
-            console.log("you win");
-            break;
-        case (playerScore < computerScore):
-            console.log("you lose");
-            break;
-    }
+        switch (true) {
+            case (playerScore == 5):
+                winnerUi.textContent = "you win";
+                break;
+            case (computerScore == 5):
+                winnerUi.textContent = "you lose";
+                break;
+        }
+    
+});
+});
+     
 }
 game();
