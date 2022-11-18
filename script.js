@@ -56,15 +56,23 @@ function playRound(playerSelection, computerSelection) {
             }
         }
     return result;
-}
-function game(){
-// buttons is a node list. It looks and acts much like an array.
+};
 const buttons = document.querySelectorAll('button');
 const scoreUi = document.querySelector('#score')
 const winnerUi = document.querySelector('#winner')
+const computerchoice = document.querySelector('#computerchoice')
+const playerchoice = document.querySelector('#playerchoice')
+const roundWinnerUI = document.querySelector('#roundWinner')
+const container = document.querySelector('#container');
+const content = document.createElement('button');
+content.classList.add('playagain');
+content.textContent = 'Play again';
+
+function game(){
+// buttons is a node list. It looks and acts much like an array.
+
 let playerScore = 0;
 let computerScore = 0;
-//scoreUi.textContent = 'djflfdl';
 
 // we use the .forEach method to iterate through each button
 buttons.forEach((button) => {
@@ -77,13 +85,14 @@ buttons.forEach((button) => {
    if(playerScore != 5 && computerScore != 5) {
     const computerSelection = getComputerChoice();
     const playerSelection = `${button.id}`;
-    console.log(computerSelection);
-    console.log(playerSelection);
-        
+    computerchoice.textContent = `${emoji(computerSelection)}`;
+    playerchoice.textContent = `${emoji(playerSelection)}`;
+    winnerUi.textContent = "VS";
+
         
         let roundWiner = playRound(playerSelection, computerSelection);
         //show the winer in this round
-        console.log(roundWiner);
+        roundWinnerUI.textContent = `${roundWiner}`;
             //if you win player score up by 1
             if (roundWiner ===`you win! ${playerSelection} beats ${computerSelection}`){
                 playerScore++;
@@ -95,18 +104,43 @@ buttons.forEach((button) => {
             
         //show score
         scoreUi.textContent = `player:${playerScore} vs computer:${computerScore}`;
-    }
+    
         switch (true) {
             case (playerScore == 5):
                 winnerUi.textContent = "you win";
+                container.appendChild(content);
                 break;
             case (computerScore == 5):
                 winnerUi.textContent = "you lose";
+                container.appendChild(content);
                 break;
         }
-    
+   }
 });
 });
      
+}
+
+content.addEventListener('click', () => { 
+    scoreUi.textContent = "player:0 vs computer:0";
+    winnerUi.textContent = "VS";
+    roundWinnerUI.textContent = "";
+    game();
+    container.removeChild(container.firstElementChild);
+
+});
+
+function emoji(value) {
+    switch (value) {
+        case "rock":
+            return "👊";
+            break;
+        case "paper":
+            return "✋";
+            break;
+        case "scissors":
+            return "✌";
+            break;
+}
 }
 game();

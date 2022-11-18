@@ -1,0 +1,65 @@
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    background-color: #261501;
+}
+#choices{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    background-color: #A67A44;
+    height: 250px;
+}
+
+.btns{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.btns button{
+    height: 100px;
+    width: 100px;
+    font-size: 50px;
+    border-radius: 22px;
+    border: 2px solid #000;
+
+    background-color: #735E4C;
+}
+#choices div{
+    font-size: 80px;
+}
+#score {
+    display: flex;
+    font-size: 30px;
+    font-weight: 900;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+}
+#roundWinner, #winner{
+    background-color: #F2AE2E;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+#roundWinner{
+    font-size: 22px;
+}
+.playagain{
+    font-size: 30px;
+    font-weight: 900;
+    padding: 12px;
+    border-radius: 22px;
+    border: 2px solid #000;
+    background-color: #735E4C;
+
+}
+button:active {
+    background-color: #382e24; /* Green */
+    border: 5px solid wheat;
+  }
